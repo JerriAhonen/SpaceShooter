@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SpaceShooter
 {
@@ -40,6 +41,9 @@ namespace SpaceShooter
         [SerializeField]
         private PlayerSpaceship _playerUnit;
 
+        [SerializeField]
+        private Text _playerHealthText;
+
         //Amount of enemies spawned so far.
         private int _enemyCount;
 
@@ -71,7 +75,9 @@ namespace SpaceShooter
 
         protected void Start()
         {
-            SpawnPlayer();
+            //Chnged this.
+            _playerUnit = SpawnPlayer();
+            SetPlayerHealthText();
 
             //Starts a new coroutine.
             StartCoroutine(SpawnEnemyRoutine());
@@ -110,12 +116,6 @@ namespace SpaceShooter
             playerShip.BecomeImmortal();
 
             return playerShip;
-
-            //if (_playerUnit.playerLives > 0)
-            //{
-            //    _playerSpawner.Spawn();
-            //    _playerUnit.GetComponent<Health>().IncreaseHealth(_playerUnit.GetComponent<Health>().MaximumHealth);
-            //}
         }
 
         private EnemySpaceShip SpawnEnemyUnit()
@@ -173,14 +173,30 @@ namespace SpaceShooter
 
         void Update()
         {
+
+            //Debug.Log(_playerUnit.GetComponent<Health>().CurrentHealth);
             if (_playerUnit.GetComponent<Health>().CurrentHealth <= 0)
             {
+
                 if (_playerUnit.playerLives > 0)
                 {
-                    PlayerSpaceship player = SpawnPlayer();
+                    _playerUnit = SpawnPlayer();
+                    //PlayerSpaceship player = SpawnPlayer();
                     _playerUnit.GetComponent<Health>().IncreaseHealth(_playerUnit.GetComponent<Health>().MaximumHealth);
-                    Debug.Log("Totally spawned again, dude!");
+                    Debug.Log("Player Spawned");
                 }
+            }
+            SetPlayerHealthText();
+        }
+
+        public void SetPlayerHealthText()
+        {
+            if (_playerHealthText != null)
+            {
+                //int playerHealth = _playerUnit.GetComponent<Health>().CurrentHealth;    //Get the current player health
+                _playerHealthText.text = "Player health: " + _playerUnit.GetComponent<Health>().CurrentHealth;              //Set the text to show the current health
+                //Debug.Log("update Text");
+                //Debug.Log(playerHealth);
             }
         }
 
@@ -188,11 +204,11 @@ namespace SpaceShooter
         {
             if(GameManager.Instance.CurrentLives <= 0)
             {
-                //TO DO: Game Over!
+                //TO DO: Game Over
             }
             else
             {
-                SpawnPlayer();
+                _playerUnit = SpawnPlayer();
             }
         }
     }

@@ -13,6 +13,13 @@ namespace SpaceShooter
 
         private int _currentMovementTargetIndex = 0;
 
+        [SerializeField]
+        private int chanceToSpawn;
+
+        [SerializeField]
+        private GameObject powerUpPrefab;
+
+
         public Transform CurrentMovementTarget
         {
             get
@@ -31,6 +38,43 @@ namespace SpaceShooter
             base.Update();
 
             Shoot();
+        }
+
+        //public void CheckIfSpawn()
+        //{
+        //    Health health = GetComponent<Health>();
+        //    PowerUpSpawner powerUpSpawner = GetComponentInChildren<PowerUpSpawner>();
+
+        //    if (health.IsDead)
+        //    {
+        //        int i = Random.Range(1, 100);
+
+        //        if (i < powerUpSpawner.chanceToSpawn)
+        //        {
+        //            powerUpSpawner.Spawn();
+        //        }
+        //    }
+        //}
+
+
+        protected override void Die()
+        {
+            base.Die();
+
+            int i = Random.Range(0, 100);
+
+            if(i < chanceToSpawn)
+            {
+                SpawnPowerUp();
+            }
+
+
+        }
+
+        public void SpawnPowerUp()
+        {
+            powerUpPrefab = Instantiate(powerUpPrefab, transform.position, transform.rotation);
+
         }
 
         public void SetMovementTargets(GameObject[] movementTargets)

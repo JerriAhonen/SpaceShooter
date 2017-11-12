@@ -118,7 +118,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  text: {fileID: 0}
   playerLives: 3
+  _immortalTime: 1
 --- !u!114 &114577388369083594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,9 +132,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc79f7ff263c18f428df8c192dab5795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialHealth: 50
+  _initialHealth: 70
   _minHealth: 0
   _maxHealth: 100
+  _currentHealth: 100
 --- !u!114 &114870352021069870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,6 +159,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -171,6 +175,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -187,3 +192,5 @@ SpriteRenderer:
   m_Size: {x: 0.4, y: 0.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SpaceShooter
 {
@@ -10,9 +11,12 @@ namespace SpaceShooter
         public const string VerticalAxis = "Vertical";
         public const string FireButtonName = "Fire1";
 
+        [SerializeField]
+        private Text text;
+
         //[SerializeField]
         public int playerLives;
-
+            
         [SerializeField]
         private float _immortalTime = 1;
 
